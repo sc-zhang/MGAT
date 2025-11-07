@@ -10,22 +10,25 @@ def __classify(sub_iden_db, threshold):
         for sp in sub_iden_db[chrn]:
             classify_db[chrn][sp] = []
             iden_list = []
-            for ref_name in sub_iden_db[chrn][sp]:
-                iden_list.append([ref_name, sub_iden_db[chrn][sp][ref_name]])
+            if sub_iden_db[chrn][sp]:
+                for ref_name in sub_iden_db[chrn][sp]:
+                    iden_list.append([ref_name, sub_iden_db[chrn][sp][ref_name]])
 
-            if len(iden_list) == 1:
-                best_ref_name = iden_list[0][0]
-                best_iden = iden_list[0][1]
-                classify_db[chrn][sp] = [best_ref_name, best_iden]
-            else:
-                iden_list = sorted(iden_list, key=lambda x: x[1], reverse=True)
-                best_ref_name = iden_list[0][0]
-                best_iden = iden_list[0][1]
-
-                if best_iden < iden_list[1][1] * threshold:
-                    classify_db[chrn][sp] = ["Undetermined", best_iden]
-                else:
+                if len(iden_list) == 1:
+                    best_ref_name = iden_list[0][0]
+                    best_iden = iden_list[0][1]
                     classify_db[chrn][sp] = [best_ref_name, best_iden]
+                else:
+                    iden_list = sorted(iden_list, key=lambda x: x[1], reverse=True)
+                    best_ref_name = iden_list[0][0]
+                    best_iden = iden_list[0][1]
+
+                    if best_iden < iden_list[1][1] * threshold:
+                        classify_db[chrn][sp] = ["Undetermined", best_iden]
+                    else:
+                        classify_db[chrn][sp] = [best_ref_name, best_iden]
+            else:
+                classify_db[chrn][sp] = ["Undetermined", 0]
     return classify_db
 
 

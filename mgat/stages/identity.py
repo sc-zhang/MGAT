@@ -27,7 +27,7 @@ def __calc_identity(bam_file, ref_chrn):
     return iden_db
 
 
-def identify_blocks_ancestor(mapping_dir, iden_dir, threads):
+def identify_blocks_ancestor(split_dir, mapping_dir, iden_dir, threads):
     if not os.path.exists(iden_dir):
         os.makedirs(iden_dir)
 
@@ -124,5 +124,22 @@ def identify_blocks_ancestor(mapping_dir, iden_dir, threads):
                     merged_db[qry_name][chrn] = {}
                 if sp not in merged_db[qry_name][chrn]:
                     merged_db[qry_name][chrn][sp] = {}
-                merged_db[qry_name][chrn][sp][ref_name] = iden
+                if ref_name != "None":
+                    merged_db[qry_name][chrn][sp][ref_name] = iden
+
+    # Fill merged_db with blocks which could not be mapped
+    for fn in os.listdir(split_dir):
+        full_fn = os.path.join(split_dir, fn)
+        qry_name = ".".join(fn.split(".")[:-1])
+        if qry_name not in merged_db:
+            merged_db[qry_name] = {}
+        with open(full_fn, "r") as fin:
+            for line in fin:
+                if line.strip() and line[0] == ">":
+                    chrn, sp, _ = line.strip()[1:].split("::")
+                    sp = int(sp)
+                    if chrn not in merged_db[qry_name]:
+                        merged_db[qry_name][chrn] = {}
+                    if sp not in merged_db[qry_name][chrn]:
+                        merged_db[qry_name][chrn][sp] = {}
     return merged_db

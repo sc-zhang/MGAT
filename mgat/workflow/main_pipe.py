@@ -89,7 +89,7 @@ def pipeline(opts):
 
     Message.info("Step3. Getting blocks identities...")
     iden_dir = os.path.join(out_dir, "03.identities")
-    block_iden_db = identify_blocks_ancestor(mapping_dir, iden_dir, threads)
+    block_iden_db = identify_blocks_ancestor(split_dir, mapping_dir, iden_dir, threads)
     if block_iden_db:
         Message.info("Getting blocks identities finished")
     else:
