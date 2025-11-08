@@ -8,6 +8,7 @@ blocks based on reference genomes.
 ### Software
 
 - minimap2
+- samtools
 
 ### Python Modules
 
