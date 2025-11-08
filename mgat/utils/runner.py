@@ -33,7 +33,7 @@ class Minimap2Runner(Runner):
     def mapping(
         self, ref_file, qry_file, out_bam, threads, minimap_params="-ax asm5 --eqx"
     ):
-        if os.path.getsize(ref_file) >= 2**32:
+        if os.path.getsize(ref_file) >= 4e9:
             if "--split-prefix" not in minimap_params:
                 minimap_params += " --split-prefix %s" % (out_bam + ".minimap.idx")
         self._cmd = (
