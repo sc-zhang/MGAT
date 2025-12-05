@@ -8,6 +8,7 @@ from mgat.stages.mapping import mapping_with_minimap2
 from mgat.stages.identity import identify_blocks_ancestor
 from mgat.stages.classify import classify_blocks
 from mgat.stages.chain_classify import chain_classify_blocks
+from mgat.__version__ import __version__
 
 
 def get_opts():
@@ -50,6 +51,7 @@ def get_opts():
     parser.add_argument(
         "-t", "--threads", help="Number of threads, default=10", default=10, type=int
     )
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s " + __version__)
     return parser.parse_args()
 
 

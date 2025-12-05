@@ -31,7 +31,7 @@ source ~/.bash_profile
 ## Usage
 
 ```bash
-usage: mgat.py [-h] -r REFERENCE -q QUERY [-w WINDOW] [-s STEP] -o OUTPUT [--minimap_args MINIMAP_ARGS] [--threshold THRESHOLD] [--chain CHAIN] [-t THREADS]
+usage: mgat.py [-h] -r REFERENCE -q QUERY [-w WINDOW] [-s STEP] -o OUTPUT [--minimap_args MINIMAP_ARGS] [--threshold THRESHOLD] [--chain CHAIN] [-t THREADS] [-v]
 
 options:
   -h, --help            show this help message and exit
@@ -48,6 +48,7 @@ options:
   --chain CHAIN         Block counts for classifying undetermined blocks, the blocks with this counts before current block andthe blocks with this counts after current block would be used, default=5
   -t, --threads THREADS
                         Number of threads, default=10
+  -v, --version         show program's version number and exit
 ```
 
 ## Result
